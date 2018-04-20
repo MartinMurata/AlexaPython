@@ -1,0 +1,37 @@
+# --------------- Main handler ------------------
+def lambda_handler(event, context):
+    intent_name = event['request']['intent']['name']
+    session = event['session']
+    sessions['attributes']['locations'] = {
+        'disneyland' : {
+            'descriptions': 'it is a fun and adventurous place to go, it really feels like im in an animated world
+        }
+    }
+
+    if intent_name == 'GetLocationIntent':
+        return GetLocation(event, session)
+
+# --------------- Functions that control the skill's behavior ------------------
+def GetLocation(event, session):
+    session['attributes']['userLocation'] = 
+    return response("Hi there!", session['attributes'], False)
+
+# --------------- Helper that build all of the responses ----------------------
+
+def response(text, session_attributes, should_end_session):
+    return {
+    "version": "1.0",
+     "response": {
+      "outputSpeech": {
+       "text": text,
+       "type": "PlainText"
+      },
+     "speechletResponse": {
+      "outputSpeech": {
+       "text": text
+      },
+      "shouldEndSession": should_end_session
+      }
+     },
+    "sessionAttributes": session_attributes
+    }
